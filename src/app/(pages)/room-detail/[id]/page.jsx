@@ -118,7 +118,7 @@ const Detail = async (props) => {
             </div>
           </div>
           <div className="col-md-5 ">
-            <CardPayRoom roomDetail ={roomDetail} idRoom={props.params.id}/>
+            {/* <CardPayRoom roomDetail ={roomDetail} idRoom={props.params.id}/> */}
           </div>
         </div>
         <hr />
