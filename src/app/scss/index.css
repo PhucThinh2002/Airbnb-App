@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
 }
-.header-container .navbar .navbar-brand .site-name {
+ .site-name {
   font: bold 24px "Open Sans", sans-serif;
   color: #fe6b6e;
   margin-left: 10px;
@@ -372,6 +372,33 @@
 
 .icon {
   font-size: 20px !important;
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #FE6B6E;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-to-top.show {
+  display: flex;
+  opacity: 1;
+}
+
+.scroll-to-top.hide {
+  opacity: 0;
 }
 
 * {
