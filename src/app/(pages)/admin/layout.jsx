@@ -4,7 +4,7 @@ import { CaretDownOutlined, MenuOutlined, UserOutlined, HomeOutlined, ApartmentO
 import Link from 'next/link';
 import { Dropdown } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { pageAdminActionAsync } from '@/app/redux/reducer/adminReducer/adminreducer';
+import { pageAdminActionAsync } from '@/app/redux/reducer/admin/adminreducer';
 import { useRouter } from 'next/navigation';
 import { deleteCookie, Email, TOKEN, USER_LOGIN } from '@/app/setting/setting';
 
