@@ -11,17 +11,17 @@ import { getApiRoomForUserActionAsync } from '@/app/redux/reducers/bookReducer';
 
 const Profile = () => {
     const dispatch = useDispatch();
-    
+
     const [isModalVisible, setIsModalVisible] = useState(false);
-    
+
     const [isProfileLoaded, setIsProfileLoaded] = useState(false);
     const { userProfile } = useSelector((state) => state.userReducer);
     const { apiUserBook } = useSelector((state) => state.bookReducer);
-    console.log("du lieu",apiUserBook)
+    console.log("du lieu", apiUserBook)
     const getApiRoomBook = () => {
         dispatch(getApiRoomForUserActionAsync(userProfile.id))
-    } 
-    const [editableProfile, setEditableProfile] = useState(userProfile);    
+    }
+    const [editableProfile, setEditableProfile] = useState(userProfile);
     const getProfileApi = async () => {
         await dispatch(setProfileActionAsync());
         setIsProfileLoaded(true);
@@ -63,7 +63,7 @@ const Profile = () => {
             <p>
                 <strong>Giới tính:</strong>
                 <Input
-                    value={editableProfile.gender ? "Nam":"Nữ"}
+                    value={editableProfile.gender ? "Nam" : "Nữ"}
                     onChange={(e) => setEditableProfile({ ...editableProfile, gender: e.target.value })}
                 />
             </p>
@@ -115,14 +115,14 @@ const Profile = () => {
         },
     ];
     useEffect(() => {
-    getProfileApi();
+        getProfileApi();
     }, [dispatch]);
     useEffect(() => {
         if (isProfileLoaded && userProfile.id) {
             getApiRoomBook();
         }
-      }, [isProfileLoaded, userProfile]);
-    
+    }, [isProfileLoaded, userProfile]);
+
     return (
         <>
             <Head>
@@ -131,7 +131,7 @@ const Profile = () => {
                 <meta name="robots" content="index, follow" />
                 <link rel="canonical" href={`https://demo4.cybersoft.edu.vn/profile/${userProfile.id}`} />
             </Head>
-            <HeaderMenu/>
+            <HeaderMenu />
             <div className="container py-3 my-4">
                 <div className="row">
                     <div className="col-md-4 mt-4">
@@ -186,8 +186,8 @@ const Profile = () => {
                             Chỉnh sửa hồ sơ
                         </a>
                         <h3 className='fw-bold mt-3'>Phòng Đã Thuê</h3>
-                        {apiUserBook ? (
-                            <Table dataSource={apiUserBook} columns={columns}  rowKey="id"/>
+                        {Array.isArray(apiUserBook) ? (
+                            <Table dataSource={apiUserBook} columns={columns} rowKey="id" />
                         ) : (
                             <p>Bạn chưa đặt phòng nào</p>
                         )}
