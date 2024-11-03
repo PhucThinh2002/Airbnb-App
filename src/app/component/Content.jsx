@@ -2,8 +2,8 @@
 import Image from 'next/image';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchLocationsByPageAsync } from '../redux/reducer/locationReducer';
 import Category from './HomePage/Category';
+import { fetchLocationsByPageAsync } from '../redux/reducers/locationReducer';
 const Content = () => {
     const dispatch = useDispatch();
 

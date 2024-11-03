@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import DateRangePicker from './DateRangePicker';
 import SoLuongKhach from './SoLuongKhach';
-import { LocationsActionAsync } from '../../redux/reducer/locationReducer';
+import { LocationsActionAsync } from '../../redux/reducers/locationReducer';
 import { useRouter } from 'next/navigation';
 
 
