@@ -17,7 +17,6 @@ const Profile = () => {
     const [isProfileLoaded, setIsProfileLoaded] = useState(false);
     const { userProfile } = useSelector((state) => state.userReducer);
     const { apiUserBook } = useSelector((state) => state.bookreducer);
-    console.log("du lieu",apiUserBook)
     const getApiRoomBook = () => {
         dispatch(getApiRoomForUserActionAsync(userProfile.id))
     } 
@@ -114,6 +113,7 @@ const Profile = () => {
             key: 'soLuongKhach',
         },
     ];
+    
     useEffect(() => {
     getProfileApi();
     }, [dispatch]);
@@ -186,11 +186,12 @@ const Profile = () => {
                             Chỉnh sửa hồ sơ
                         </a>
                         <h3 className='fw-bold mt-3'>Phòng Đã Thuê</h3>
-                        {apiUserBook ? (
-                            <Table dataSource={apiUserBook} columns={columns}  rowKey="id"/>
-                        ) : (
-                            <p>Bạn chưa đặt phòng nào</p>
-                        )}
+                        {Array.isArray(apiUserBook) ? (
+    <Table dataSource={apiUserBook} columns={columns} rowKey="id" />
+) : (
+    <p>Bạn chưa đặt phòng nào</p>
+)}
+
                     </div>
                 </div>
             </div>

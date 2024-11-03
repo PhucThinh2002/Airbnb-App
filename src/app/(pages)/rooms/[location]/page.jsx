@@ -140,7 +140,7 @@ const Location = async ({ params, searchParams }) => {
           {renderAllRoomLocation()}
         </div>
         <div className="col-md-6">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d984200.3130039243!2d107.31521886875078!3d15.509560292807175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420dd4e1353a7b%3A0xe49cabb166747679!2zUXXhuqNuZyBOYW0sIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1730561726170!5m2!1svi!2s" width="100%" height="100%" style={{ border: '0' }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        
         </div>
       </div>
     </div>
