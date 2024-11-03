@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { registerActionAsync } from '@/app/redux/reducer/userReducer';
+import { registerActionAsync } from '@/app/redux/reducers/userReducer';
 import * as Yup from "yup";
 
 const Register = () => {

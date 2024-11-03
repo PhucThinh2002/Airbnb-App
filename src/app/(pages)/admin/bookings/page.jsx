@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Space, Table, Input, Button, Modal, Form, notification } from 'antd';
 import { EditOutlined, DeleteOutlined, StopOutlined, PlusOutlined } from '@ant-design/icons';
-import { createBookingAsync, deleteBookingAsync, fetchBookingsAsync, updateBookingAsync } from '@/app/redux/reducer/admin/BookingReducer';
+import { createBookingAsync, deleteBookingAsync, fetchBookingsAsync, updateBookingAsync } from '@/app/redux/reducers/admin/BookingReducer';
 import dayjs from 'dayjs';
 
 const Booking = () => {

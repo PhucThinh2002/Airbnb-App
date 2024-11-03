@@ -8,7 +8,7 @@ import {
   createLocationWithImageAsync,
   updateLocationAsync,
   deleteLocationAsync,
-} from '@/app/redux/reducer/admin/locationApiReducer';
+} from '@/app/redux/reducers/admin/locationApiReducer';
 
 const { Step } = Steps;
 

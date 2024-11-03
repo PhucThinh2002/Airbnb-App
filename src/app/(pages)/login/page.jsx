@@ -3,7 +3,7 @@
   import Image from 'next/image';
   import { useRouter } from 'next/navigation';
   import { useFormik } from 'formik';
-  import { loginActionAsync } from '@/app/redux/reducer/userReducer';
+  import { loginActionAsync } from '@/app/redux/reducers/userReducer';
   import { useDispatch } from 'react-redux';
   import * as Yup from "yup";
   const Login = () => {

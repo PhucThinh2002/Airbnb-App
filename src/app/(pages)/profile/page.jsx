@@ -2,12 +2,12 @@
 import Head from 'next/head';
 import FooterComponent from '@/app/component/FooterComponent';
 import HeaderMenu from '@/app/component/HomePage/HeaderMenu';
-import { setProfileActionAsync, updateProfileActionAsync, uploadAvatarActionAsync } from '@/app/redux/reducer/userReducer';
+import { setProfileActionAsync, updateProfileActionAsync, uploadAvatarActionAsync } from '@/app/redux/reducers/userReducer';
 import { CheckCircleFilled, CloseCircleFilled, UserOutlined } from '@ant-design/icons';
 import { Button, Input, Modal, Table, Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getApiRoomForUserActionAsync } from '@/app/redux/reducer/bookReducer';
+import { getApiRoomForUserActionAsync } from '@/app/redux/reducers/bookReducer';
 
 const Profile = () => {
     const dispatch = useDispatch();
