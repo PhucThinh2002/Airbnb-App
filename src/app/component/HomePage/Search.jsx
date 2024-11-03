@@ -84,7 +84,7 @@ const Search = () => {
             <div className="col-md-4">
               <DateRangePicker onDateChange={handleDateChange} />
             </div>
-            <div className="col-md-4 d-flex">
+            <div className="col-md-3 d-flex">
               <SoLuongKhach
                 initialCount={guestCount}
                 onCountChange={handleGuestCountChange}

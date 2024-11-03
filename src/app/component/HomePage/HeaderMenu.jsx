@@ -31,10 +31,10 @@ const HeaderMenu = () => {
           </Link>
 
           <div className="d-flex align-items-center">
-            <Link href="#" className="nav-link me-2 user-link" onClick={handleUserClick}>
+            <button className="nav-link me-2 user-link" onClick={handleUserClick}>
               <i className="fas fa-user-circle user-icon" />
               {showDropdown && userDropdown}
-            </Link>
+            </button>
           </div>
         </div>
       </nav>

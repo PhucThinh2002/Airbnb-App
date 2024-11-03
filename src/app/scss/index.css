@@ -37,11 +37,12 @@
   background-color: #f0f0f0;
 }
 .header-container .navbar .user-icon {
-  font-size: 1em;
+  font-size: 1.5em;
   background-color: #fe6b6e;
   color: #fff;
   border-radius: 50%;
   padding: 10px;
+  margin-right: 10px;
 }
 .header-container .search {
   width: 60%;
