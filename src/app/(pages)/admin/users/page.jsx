@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Space, Spin, Table, Modal, message, Button, DatePicker } from 'antd';
 import TitleSearch from '@/app/component/TitleSearch';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUserActionAsync, deleteUserActionAsync, getApiUserActionAsync, updateUserActionAsync } from '@/app/redux/reducer/admin/adminreducer';
+import { addUserActionAsync, deleteUserActionAsync, getApiUserActionAsync, updateUserActionAsync } from '@/app/redux/reducers/admin/adminReducer';
 import { DeleteFilled, EditFilled, UserOutlined, } from '@ant-design/icons';
 
 const User = () => {
