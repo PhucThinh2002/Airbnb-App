@@ -7,7 +7,7 @@ import { CheckCircleFilled, CloseCircleFilled, UserOutlined } from '@ant-design/
 import { Button, Input, Modal, Table, Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getApiRoomForUserActionAsync } from '@/app/redux/reducer/bookreducer';
+import { getApiRoomForUserActionAsync } from '@/app/redux/reducer/bookReducer';
 
 const Profile = () => {
     const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const Profile = () => {
     
     const [isProfileLoaded, setIsProfileLoaded] = useState(false);
     const { userProfile } = useSelector((state) => state.userReducer);
-    const { apiUserBook } = useSelector((state) => state.bookreducer);
+    const { apiUserBook } = useSelector((state) => state.bookReducer);
     console.log("du lieu",apiUserBook)
     const getApiRoomBook = () => {
         dispatch(getApiRoomForUserActionAsync(userProfile.id))

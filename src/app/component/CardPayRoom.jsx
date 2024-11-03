@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { getCookie, http, USER_LOGIN } from '../setting/setting';
 import { useDispatch } from 'react-redux';
 import { message } from 'antd';
-import { datPhongActionAsync } from '../redux/reducer/bookreducer';
+import { datPhongActionAsync } from '../redux/reducer/bookReducer';
 
 const CardPayRoom = (props) => {
   const { roomDetail, idRoom } = props

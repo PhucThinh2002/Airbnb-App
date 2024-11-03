@@ -6,7 +6,7 @@ import locationReducer from './reducer/locationReducer';
 import roomReducer from './reducer/admin/roomReducer';
 import locationApiReducer from './reducer/admin/locationApiReducer';
 import BookingReducer from './reducer/admin/BookingReducer';
-import bookreducer from './reducer/bookreducer'
+import bookReducer from './reducer/bookReducer'
 export const Store = configureStore({
     reducer: {
         userReducer,
@@ -15,6 +15,6 @@ export const Store = configureStore({
         locationApiReducer,
         BookingReducer,
         roomReducer,
-        bookreducer
+        bookReducer
     },
 });
