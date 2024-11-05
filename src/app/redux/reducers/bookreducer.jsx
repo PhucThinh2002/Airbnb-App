@@ -5,7 +5,7 @@ const initialState = {
     apiUserBook: [{}]
 }
 
-const bookreducer = createSlice({
+const bookReducer = createSlice({
   name: "bookReducer",
   initialState,
   reducers: {
@@ -18,9 +18,9 @@ const bookreducer = createSlice({
   }
 });
 
-export const {setDatPhongAction, setRoomForUserAction} = bookreducer.actions
+export const {setDatPhongAction, setRoomForUserAction} = bookReducer.actions
 
-export default bookreducer.reducer
+export default bookReducer.reducer
 
 export const datPhongActionAsync = (id = 0, maPhong, ngayDen, ngayDi, soLuongKhach, maNguoiDung) => {
     return async (dispatch) => {
