@@ -6,7 +6,7 @@ const initialState = {
 }
 
 const bookreducer = createSlice({
-  name: "bookreducer",
+  name: "bookReducer",
   initialState,
   reducers: {
     setDatPhongAction: (state,action) => {
