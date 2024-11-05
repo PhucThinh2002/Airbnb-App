@@ -7,7 +7,7 @@ import { CheckCircleFilled, CloseCircleFilled, UserOutlined } from '@ant-design/
 import { Button, Input, Modal, Table, Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getApiRoomForUserActionAsync } from '@/app/redux/reducers/bookReducer';
+import { getApiRoomForUserActionAsync } from '@/app/redux/reducers/bookreducer';
 
 const Profile = () => {
     const dispatch = useDispatch();
