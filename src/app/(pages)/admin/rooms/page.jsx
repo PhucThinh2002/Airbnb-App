@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { Space, Spin, Table, Modal, message } from 'antd';
 import TitleSearch from '@/app/component/TitleSearch';
-import { addRoomActionAsync, deleteRoomActionAsync, getApiRoomActionAsync, updateRoomActionAsync } from '@/app/redux/reducers/admin/roomReducer';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteFilled, EditFilled } from '@ant-design/icons';
+import { addRoomActionAsync, deleteRoomActionAsync, getApiRoomActionAsync, updateRoomActionAsync } from '@/app/redux/reducers/admin/roomReducer';
 
 const Room = () => {
   const dispatch = useDispatch();
