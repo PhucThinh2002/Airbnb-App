@@ -37,7 +37,7 @@ const Category = () => {
                 <Carousel
                     dots={true}
                     autoplay={true}
-                    autoplaySpeed={3000}
+                    autoplaySpeed={2000}
                     slidesToShow={12}
                     slidesToScroll={1}
                 >

@@ -1,6 +1,10 @@
 .header-container .navbar {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 .header-container .navbar .navbar-brand {
   display: flex;
@@ -11,14 +15,17 @@
   color: #fe6b6e;
   margin-left: 10px;
 }
+.header-container .navbar .navbar-nav {
+  display: flex;
+  gap: 15px;
+}
 .header-container .navbar .navbar-nav .nav-link {
   color: #000;
   font-weight: normal;
-  transition: background-color 0.3s ease;
+  transition: color 0.3s ease;
 }
 .header-container .navbar .navbar-nav .nav-link:hover {
-  background-color: #f0f0f0;
-  border-radius: 5px;
+  color: #fe6b6e;
 }
 .header-container .navbar .navbar-nav .nav-link.active {
   color: #fe6b6e;
@@ -34,7 +41,7 @@
 .header-container .navbar .globe-link:hover,
 .header-container .navbar .host-link:hover,
 .header-container .navbar .user-link:hover {
-  background-color: #f0f0f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .header-container .navbar .user-icon {
   font-size: 1em;

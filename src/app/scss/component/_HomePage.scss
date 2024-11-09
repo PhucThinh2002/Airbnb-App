@@ -2,48 +2,54 @@
   .navbar {
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  
     .navbar-brand {
       display: flex;
       align-items: center;
-
+  
       .site-name {
         font: bold 24px "Open Sans", sans-serif;
         color: #fe6b6e;
         margin-left: 10px;
       }
     }
-
+  
     .navbar-nav {
+      display: flex;
+      gap: 15px;
+  
       .nav-link {
         color: #000;
         font-weight: normal;
-        transition: background-color 0.3s ease;
-
+        transition: color 0.3s ease;
+  
         &:hover {
-          background-color: #f0f0f0;
-          border-radius: 5px;
+          color: #fe6b6e;
         }
-
+  
         &.active {
           color: #fe6b6e;
           font-weight: bold;
         }
       }
     }
-
+  
     .globe-link,
     .host-link,
     .user-link {
       transition: background-color 0.3s ease;
       border-radius: 15px;
       background-color: transparent;
-
+  
       &:hover {
-        background-color: #f0f0f0;
+        box-shadow:  0 2px 4px rgba(0, 0, 0, 0.1);
       }
     }
-
+  
     .user-icon {
       font-size: 1em;
       background-color: #fe6b6e;
@@ -52,6 +58,7 @@
       padding: 10px;
     }
   }
+  
 
   .search {
     width: 60%;
