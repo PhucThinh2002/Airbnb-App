@@ -59,7 +59,7 @@ const FooterComponent = () => {
         </div>
         <div className="row mt-3 pb-3 px-5 align-items-center ">
             <div className="col-12 d-flex justify-content-between">
-              <p className="mb-0">© 2022 Airbnb, Inc. Quyền riêng tư . Điều khoản . Sơ đồ trang web</p>
+              <p className="mb-0">© 2024 Airbnb, Inc. Quyền riêng tư . Điều khoản . Sơ đồ trang web</p>
 
               <div className="d-flex">
                 <div className="me-3">
