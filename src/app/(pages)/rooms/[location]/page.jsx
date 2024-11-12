@@ -8,7 +8,7 @@ import React from 'react';
 const capitalizeWords = (str) => {
   return str
     .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))  
     .join(' ');
 };
 const formatDate = (dateString) => {

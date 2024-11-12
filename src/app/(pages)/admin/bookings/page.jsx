@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Space, Table, Input, Button, Modal, Form, notification } from 'antd';
-import { EditOutlined, DeleteOutlined, StopOutlined, PlusOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, StopOutlined, PlusOutlined, EyeOutlined } from '@ant-design/icons';
 import { createBookingAsync, deleteBookingAsync, fetchBookingsAsync, updateBookingAsync } from '@/app/redux/reducers/admin/BookingReducer';
 import dayjs from 'dayjs';
 
@@ -11,7 +11,9 @@ const Booking = () => {
   const { bookings, loading } = useSelector(state => state.BookingReducer);
 
   const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const [isDetailModalVisible, setIsDetailModalVisible] = React.useState(false);
   const [editingBooking, setEditingBooking] = React.useState(null);
+  const [selectedBooking, setSelectedBooking] = React.useState(null);
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -34,6 +36,11 @@ const Booking = () => {
     dispatch(deleteBookingAsync(bookingId));
   };
 
+  const handleViewDetails = (record) => {
+    setSelectedBooking(record);
+    setIsDetailModalVisible(true);
+  };
+
   const handleSubmit = () => {
     form.validateFields().then(values => {
       if (editingBooking) {
@@ -49,7 +56,6 @@ const Booking = () => {
       console.error('Validation Failed:', errorInfo);
     });
   };
-
 
   const columns = [
     { title: 'Mã đặt phòng', dataIndex: 'id', key: 'id' },
@@ -83,6 +89,7 @@ const Booking = () => {
       key: 'actions',
       render: (_, record) => (
         <Space size="middle">
+          <EyeOutlined style={{ color: 'purple', cursor: 'pointer' }} onClick={() => handleViewDetails(record)} />
           <EditOutlined style={{ color: 'blue', cursor: 'pointer' }} onClick={() => handleEditBooking(record)} />
           <DeleteOutlined style={{ color: 'red', cursor: 'pointer' }} onClick={() => handleDeleteBooking(record.id)} />
         </Space>
@@ -164,6 +171,24 @@ const Booking = () => {
         </Form>
       </Modal>
 
+      <Modal
+        title="Chi Tiết Đặt Phòng"
+        open={isDetailModalVisible}
+        onCancel={() => setIsDetailModalVisible(false)}
+        footer={null}
+      >
+        {selectedBooking ? (
+          <div>
+            <p><strong>Mã Đặt Phòng:</strong> {selectedBooking.id}</p>
+            <p><strong>Mã Phòng:</strong> {selectedBooking.maPhong}</p>
+            <p><strong>Mã Người Dùng:</strong> {selectedBooking.maNguoiDung}</p>
+            <p><strong>Ngày Đến:</strong> {dayjs(selectedBooking.ngayDen).format('DD/MM/YYYY')}</p>
+            <p><strong>Ngày Đi:</strong> {dayjs(selectedBooking.ngayDi).format('DD/MM/YYYY')}</p>
+            <p><strong>Số Khách:</strong> {selectedBooking.soLuongKhach}</p>
+            <p><strong>Trạng Thái:</strong> {selectedBooking.status}</p>
+          </div>
+        ) : <p>Không có thông tin để hiển thị.</p>}
+      </Modal>
     </div>
   );
 };

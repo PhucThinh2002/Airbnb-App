@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { Button, Space, Table, Input, Modal, Form, Upload, message, Steps } from 'antd';
+import { Button, Space, Table, Input, Modal, Form, Upload, message, Steps, Select} from 'antd';
 import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -133,6 +133,16 @@ const Location = () => {
       ),
     },
   ];
+  
+  const provinces = [
+    "Hà Nội", "Hồ Chí Minh", "Đà Nẵng", "Hải Phòng", "Cần Thơ",
+    "Nghệ An", "Thanh Hóa", "Khánh Hòa", "Bình Định", "Quảng Nam",
+  ];
+  
+  const countries = [
+    "Việt Nam", "Hoa Kỳ", "Canada", "Úc", "Anh",
+    "Nhật Bản", "Hàn Quốc", "Singapore", "Pháp", "Đức",
+  ];
 
   const handleImageChange = (info) => {
     if (info.file.status === 'done') {
@@ -187,7 +197,7 @@ const Location = () => {
       />
       <Modal
         title={editingLocation ? "Chỉnh sửa vị trí" : "Thêm vị trí mới"}
-        visible={isModalOpen}
+        open={isModalOpen}
         onCancel={resetModal}
         footer={[
           <Button key="back" onClick={handlePrev} disabled={currentStep === 0}>
@@ -220,26 +230,32 @@ const Location = () => {
               <Form.Item
                 label="Tỉnh Thành"
                 name="tinhThanh"
-                rules={[{ required: true, message: 'Vui lòng nhập tỉnh thành!' }]}
+                rules={[{ required: true, message: 'Vui lòng chọn tỉnh thành!' }]}
               >
-                <Input
+                <Select
+                  placeholder="Chọn tỉnh thành"
                   value={locationData.tinhThanh}
-                  onChange={(e) =>
-                    setLocationData({ ...locationData, tinhThanh: e.target.value })
-                  }
-                />
+                  onChange={(value) => setLocationData({ ...locationData, tinhThanh: value })}
+                >
+                  {provinces.map((province) => (
+                    <Option key={province} value={province}>{province}</Option>
+                  ))}
+                </Select>
               </Form.Item>
               <Form.Item
                 label="Quốc Gia"
                 name="quocGia"
-                rules={[{ required: true, message: 'Vui lòng nhập quốc gia!' }]}
+                rules={[{ required: true, message: 'Vui lòng chọn quốc gia!' }]}
               >
-                <Input
+                <Select
+                  placeholder="Chọn quốc gia"
                   value={locationData.quocGia}
-                  onChange={(e) =>
-                    setLocationData({ ...locationData, quocGia: e.target.value })
-                  }
-                />
+                  onChange={(value) => setLocationData({ ...locationData, quocGia: value })}
+                >
+                  {countries.map((country) => (
+                    <Option key={country} value={country}>{country}</Option>
+                  ))}
+                </Select>
               </Form.Item>
             </>
           )}
@@ -255,7 +271,7 @@ const Location = () => {
                 name="logo"
                 listType="picture"
                 maxCount={1}
-                beforeUpload={() => false} // Prevent auto-upload, manual upload only
+                beforeUpload={() => false} 
                 onChange={handleImageChange}
               >
                 <Button icon={<PlusOutlined />}>Chọn ảnh</Button>
