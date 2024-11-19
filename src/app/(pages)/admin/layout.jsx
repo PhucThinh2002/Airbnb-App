@@ -7,14 +7,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { pageAdminActionAsync } from '@/app/redux/reducers/admin/adminReducer';
 import { useRouter } from 'next/navigation';
 import { deleteCookie, Email, TOKEN, USER_LOGIN } from '@/app/setting/setting';
+import { setProfileActionAsync } from '@/app/redux/reducers/userReducer';
 
 const Layout = ({ children }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const isAdmin = useSelector((state) => state.adminReducer.isAdmin);
-  const [sidebarVisible, setSidebarVisible] = useState(true);
-  const [activeMenu, setActiveMenu] = useState('/admin/users');
-
+  const [sidebarVisible, setSidebarVisible] = useState(true); 
+  const [activeMenu, setActiveMenu] = useState('');
+  const { userProfile } = useSelector((state) => state.userReducer);
+  const getProfileApi = async () => {
+    await dispatch(setProfileActionAsync());
+};
   const getPageAdmin = () => {
     const action = pageAdminActionAsync(router);
     dispatch(action);
@@ -22,6 +26,7 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     getPageAdmin();
+    getProfileApi()
   }, []);
 
   const handleMenuClick = (key) => {
@@ -33,6 +38,8 @@ const Layout = ({ children }) => {
       localStorage.removeItem(USER_LOGIN);
       deleteCookie(USER_LOGIN);
       router.push('/login');
+    }else if(key === "1"){
+      router.push('/profile');
     } else {
       setActiveMenu(key);
     }
@@ -82,15 +89,15 @@ const Layout = ({ children }) => {
 
       <div className={`flex-grow-1 d-flex flex-column`} style={{ marginLeft: sidebarVisible ? '250px' : '0', transition: 'margin-left 0.3s ease', minHeight: '100vh' }}>
         <header className="d-flex justify-content-between bg-dark align-items-center pe-3 position-fixed"
-          style={{ top: 0, left: sidebarVisible ? '250px' : '0', right: 0, zIndex: 1000, height: '56px', transition: 'left 0.3s ease' }}>
-          <div className="d-flex align-items-center" style={{ height: '56px' }}>
+          style={{ top: 0, left: sidebarVisible ? '250px' : '0', right: 0, zIndex: 1000, height: '60px', transition: 'left 0.3s ease' }}>
+          <div className="d-flex align-items-center" style={{ height: '60px' }}>
             <span style={{ cursor: 'pointer' }} onClick={() => setSidebarVisible(!sidebarVisible)}>
-              <MenuOutlined className="text-white p-3" style={{ fontSize: '1.5rem', background: '#FE6B6E', height: '56px' }} />
+              <MenuOutlined className="text-white p-3" style={{ fontSize: '1.5rem', background: '#FE6B6E', height: '60px' }} />
             </span>
           </div>
-          <div className="d-flex align-items-center text-white">
-            <img src="https://i.pravatar.cc/?u=1" width='50px' alt="User Avatar" className="rounded-circle me-2" />
-            <span className="me-2">admin</span>
+          <div className="d-flex py-3 align-items-center text-white">
+            <img src={userProfile.avatar} width='50px' alt="User Avatar" className="rounded-circle me-2" />
+            <span className="me-2">{userProfile.name}</span>
             <Dropdown
               menu={{
                 items: [

@@ -342,7 +342,7 @@ const User = () => {
 
   return (
     <div className="table-admin">
-      <TitleSearch title="Thêm quản trị viên" onClick={() => { showModal("add") }} onSearch={handleSearch} />
+      <TitleSearch title="Thêm người dùng" onClick={() => { showModal("add") }} onSearch={handleSearch} />
 
       {loading ? (
         <Spin  style={{ display: 'flex', justifyContent: 'center', marginTop: '20%' }} />
@@ -351,12 +351,25 @@ const User = () => {
       )}
 
       <Modal
-        title={modalType === 'add' ? "Thêm quản trị viên" : "Cập nhật người dùng"}
+        
         open={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
         okButtonProps={{ disabled: !isFormChanged() }}
-        okText={modalType === 'add' ? "Thêm Admin" : "Cập nhật"}
+        okText={
+          modalType === "add"
+            ? "Thêm người dùng"
+            : modalType === "delete"
+            ? "Xóa"
+            : "Cập nhật"
+        }
+        title={
+          modalType === "add"
+            ? "Thêm người dùng"
+            : modalType === "delete"
+            ? "Xóa người dùng"
+            : "Cập nhật người dùng"
+        }
       >
         {renderModalContent(modalType, modalRecord)}
       </Modal>

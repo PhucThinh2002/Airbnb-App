@@ -17,14 +17,18 @@ const Profile = () => {
     const [isProfileLoaded, setIsProfileLoaded] = useState(false);
     const { userProfile } = useSelector((state) => state.userReducer);
     const { apiUserBook } = useSelector((state) => state.bookReducer);
-    console.log("du lieu", apiUserBook)
+    const [loading, setLoading] = useState(true);
     const getApiRoomBook = () => {
+        setLoading(true);
         dispatch(getApiRoomForUserActionAsync(userProfile.id))
+        setLoading(false);
     }
     const [editableProfile, setEditableProfile] = useState(userProfile);
     const getProfileApi = async () => {
+        setLoading(true);
         await dispatch(setProfileActionAsync());
         setIsProfileLoaded(true);
+        setLoading(false);
     };
     const showModal = () => {
         setEditableProfile(userProfile);
@@ -61,12 +65,23 @@ const Profile = () => {
                 />
             </p>
             <p>
-                <strong>Giới tính:</strong>
-                <Input
-                    value={editableProfile.gender ? "Nam" : "Nữ"}
-                    onChange={(e) => setEditableProfile({ ...editableProfile, gender: e.target.value })}
-                />
-            </p>
+    <strong >Giới tính:</strong>
+    <select
+        value={editableProfile.gender ? "Nam" : "Nữ"}
+        onChange={(e) => setEditableProfile({ ...editableProfile, gender: e.target.value === "Nam" })}
+        style={{
+            padding: "5px 10px",
+            border: "1px solid #ccc",
+            borderRadius: "4px",
+            width: "120px", 
+            display: "block",
+        }}
+    >
+        <option value="Nam">Nam</option>
+        <option value="Nữ">Nữ</option>
+    </select>
+</p>
+
         </div>
     );
     const handleFileChange = async (e) => {
@@ -114,6 +129,11 @@ const Profile = () => {
             key: 'soLuongKhach',
         },
     ];
+    const dataSource = apiUserBook.map((item) => ({
+        ...item,
+        key: item.id, 
+    }));
+    
     useEffect(() => {
         getProfileApi();
     }, [dispatch]);
@@ -125,7 +145,8 @@ const Profile = () => {
 
     return (
         <>
-            <Head>
+            {loading ? <Spin style={{ display: 'flex', justifyContent: 'center', alignItems: "center",height:"100vh", width: '100%' }}/>: <div>
+                <Head>
                 <title>Hồ Sơ Của {userProfile.name}</title>
                 <meta name="description" content={`Thông tin chi tiết về hồ sơ của ${userProfile.name}. Cập nhật và quản lý thông tin cá nhân của bạn dễ dàng.`} />
                 <meta name="robots" content="index, follow" />
@@ -187,7 +208,7 @@ const Profile = () => {
                         </a>
                         <h3 className='fw-bold mt-3'>Phòng Đã Thuê</h3>
                         {Array.isArray(apiUserBook) ? (
-                            <Table dataSource={apiUserBook} columns={columns} rowKey="id" />
+                            <Table dataSource={dataSource} columns={columns} rowKey="id" />
                         ) : (
                             <p>Bạn chưa đặt phòng nào</p>
                         )}
@@ -231,7 +252,7 @@ const Profile = () => {
                 {editableProfile ? renderUserProfile() : <p>Không có thông tin người dùng</p>}
             </Modal>
 
-            <FooterComponent />
+            <FooterComponent /></div>}
         </>
     );
 };

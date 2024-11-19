@@ -1,6 +1,6 @@
 
 import { getRoomByIDAction } from '@/app/actions/service/roomApi';
-import { CarOutlined, TranslationOutlined, UserOutlined, WifiOutlined } from '@ant-design/icons';
+import { CarOutlined, StarFilled, TranslationOutlined, UserOutlined, WifiOutlined } from '@ant-design/icons';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -15,6 +15,7 @@ import FooterComponent from '@/app/component/FooterComponent';
 
 const Detail = async (props) => {
   const roomDetail = await getRoomByIDAction(props.params.id);
+  const selectedDate = props.searchParams.date ? JSON.parse(decodeURIComponent(props.searchParams.date)) : null;
   const features = [
     { condition: roomDetail.mayGiat, label: "Máy Giặt", icon: faSoap },
     { condition: roomDetail.banLa, label: "Bàn là", icon: faTShirt },
@@ -32,8 +33,8 @@ const Detail = async (props) => {
     <HeaderMenu/>
       <div className="container py-3 my-5">
         <h3 className="fw-bold">{roomDetail.tenPhong}</h3>
-        <span>Chủ nhà siêu cấp</span>
-        <Link href="#">{roomDetail.maViTri}</Link>
+        <span><StarFilled style={{color:"red"}}/></span>
+        <Link className='px-3' style={{textDecoration:"none"}} href="#">{props.searchParams.location}</Link>
         <Image src={roomDetail.hinhAnh} style={{ width: '100%', height: '400px' }} alt="..." width={500} height={300} crossOrigin="anonymous" priority />
         <div className="row mt-3">
           <div className="col-md-7">
@@ -96,12 +97,12 @@ const Detail = async (props) => {
             </div>
             <hr />
             <div className="w-100 mt-4">
-              <Button
+              {/* <Button
                 className="w-100 text-black bg-white border-2 border-black rounded-lg py-3 hover:bg-gray-200 duration-300 flex justify-between items-center px-6"
                 icon={<TranslationOutlined />}
               >
                 Dịch sang tiếng Anh
-              </Button>
+              </Button> */}
               <p className="mt-4 text-justify">
               Tự nhận phòng Tự nhận phòng bằng khóa thông minh. Dinh Long là Chủ nhà siêu cấp Chủ nhà siêu cấp là những chủ nhà có kinh nghiệm, được đánh giá cao và là những người cam kết mang lại quãng thời gian ở tuyệt vời cho khách.
               </p>
@@ -118,7 +119,7 @@ const Detail = async (props) => {
             </div>
           </div>
           <div className="col-md-5 ">
-            <CardPayRoom roomDetail ={roomDetail} idRoom={props.params.id}/>
+            <CardPayRoom roomDetail ={roomDetail} date= {selectedDate} count = {props.searchParams.count} idRoom={props.params.id}/>
           </div>
         </div>
         <hr />

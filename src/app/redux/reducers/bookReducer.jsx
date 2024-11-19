@@ -1,8 +1,10 @@
 import { http } from '@/app/setting/setting';
 import { createSlice } from '@reduxjs/toolkit'
+import { message } from 'antd';
 
 const initialState = {
-    apiUserBook: [{}]
+    apiUserBook: [{}],
+    apiFindBook: {}
 }
 
 const bookReducer = createSlice({
@@ -14,11 +16,14 @@ const bookReducer = createSlice({
     },
     setRoomForUserAction: (state,action) => {
         state.apiUserBook = action.payload
+    },
+    setFindBookAction: (state,action) => {
+        state.apiFindBook = action.payload
     }
   }
 });
 
-export const {setDatPhongAction, setRoomForUserAction} = bookReducer.actions
+export const {setDatPhongAction, setRoomForUserAction, setFindBookAction} = bookReducer.actions
 
 export default bookReducer.reducer
 
@@ -37,8 +42,7 @@ export const datPhongActionAsync = (id = 0, maPhong, ngayDen, ngayDi, soLuongKha
             const action = setDatPhongAction(res.data.content);
             dispatch(action);
         } catch (err) {
-            console.log("Du lieu ", maPhong, ngayDen, ngayDi, soLuongKhach, maNguoiDung)
-            console.error("Lỗi đặt phòng:", err);
+            message.error("Bạn cần đăng nhập để có thể đặt phòng");
         }
     };
 };
@@ -50,3 +54,16 @@ export const getApiRoomForUserActionAsync = (id) => {
         dispatch(action)
     }
 }
+// Lấy thông tin search về location, thời gian và số lượng khách của người dùng 
+export const getFindBookActionAsync = (id, date, count) => {
+    return async(dispatch) => {
+      try {
+        const action = setFindBookAction(id, date, count);
+        dispatch(action);
+        console.log("FindBookAction dispatched: ", { id, date, count });
+      } catch (error) {
+        console.error("Error fetching booking data: ", error);
+      }
+    }
+  }
+  

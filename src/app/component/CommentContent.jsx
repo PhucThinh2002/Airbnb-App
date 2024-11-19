@@ -95,7 +95,7 @@ const CommentContent = (props) => {
         getCommentByRoom();
         frm_comments.resetForm();
       } catch (error) {
-        console.error("Không thể đăng bình luận:", error);
+        message.error("Bạn cần đăng nhập để bình luận")
       }
     },
   });
@@ -192,7 +192,7 @@ const CommentContent = (props) => {
                       className="text-warning"
                       style={{ fontSize: 16 }}
                     />
-                    {userProfile.id === comment.maNguoiBinhLuan && (
+                    {userProfile?.id === comment.maNguoiBinhLuan && (
                       <Dropdown
                         menu={{
                           items: [
