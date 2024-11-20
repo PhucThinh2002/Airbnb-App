@@ -4,11 +4,15 @@ import { getCookie, http, USER_LOGIN } from "../setting/setting";
 import { useDispatch, useSelector } from "react-redux";
 import { message, Modal } from "antd";
 import { datPhongActionAsync } from "../redux/reducers/bookReducer";
-
+import moment from "moment";
 const CardPayRoom = (props) => {
   const { roomDetail, idRoom } = props;
   const formatDate = (dateString) => {
     if (!dateString) return '';
+    if (typeof dateString !== 'string') {
+      console.error('dateString is not a string');
+      return '';
+    }
     const [day, month, year] = dateString.split('-');
     return `${year}-${month}-${day}`
   };
@@ -20,10 +24,10 @@ const CardPayRoom = (props) => {
   }
   
   const [countGuest, setCountGuest] = useState(+count || 1);
-  const [checkInDate, setCheckInDate] = useState(formatDate(props.date[0] || ""));
+  const [checkInDate, setCheckInDate] = useState(formatDate(props.date[0] || moment()));
   const [checkOutDate, setCheckOutDate] = useState(formatDate(props.date[1]) || "");
   const [userProfile, setUserProfile] = useState(null);
-  const [isModalVisible, setIsModalVisible] = useState(false); // State for controlling modal visibility
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
 
   const calculateNights = () => {
@@ -80,12 +84,10 @@ const CardPayRoom = (props) => {
     getCommentByRoom();
   }, [idRoom]);
 
-  // Function to show confirmation modal
   const showModal = () => {
     setIsModalVisible(true);
   };
 
-  // Function to handle confirm action
   const handleOk = async () => {
     if (!userProfile) {
       message.error("Bạn cần đăng nhập để có thể đặt phòng");
@@ -110,14 +112,13 @@ const CardPayRoom = (props) => {
       );
       await dispatch(action);
       message.success("Đặt phòng thành công");
-      setIsModalVisible(false); // Close the modal after successful booking
+      setIsModalVisible(false); 
     } catch (err) {
       message.error("Có lỗi xảy ra, vui lòng thử lại");
       setIsModalVisible(false);
     }
   };
 
-  // Function to handle cancel action
   const handleCancel = () => {
     setIsModalVisible(false);
   };
@@ -158,9 +159,9 @@ const CardPayRoom = (props) => {
           <div className="mt-4">
             <div>Khách tối đa: {roomDetail.khach}</div>
             <div className=" mt-3 text-center ">
-              <div>
+              <div className="d-flex align-items-center justify-content-center">
                 <button
-                  className="btn btn-outline-danger mx-5 btn-sm rounded-circle"
+                  className="btn btn-outline-danger mx-2 btn-sm rounded-circle"
                   style={{
                     width: "36px",
                     height: "36px",
@@ -178,7 +179,7 @@ const CardPayRoom = (props) => {
                 </button>
                 <span className="mx-2">{countGuest} khách</span>
                 <button
-                  className="btn btn-outline-danger mx-5 btn-sm rounded-circle"
+                  className="btn btn-outline-danger mx-2 btn-sm rounded-circle"
                   style={{
                     width: "36px",
                     height: "36px",
@@ -201,12 +202,11 @@ const CardPayRoom = (props) => {
 
         <button
           className="btn btn-danger w-100 mb-3"
-          onClick={showModal} // Show confirmation modal
+          onClick={showModal}
         >
           Đặt phòng
         </button>
 
-        {/* Confirmation Modal */}
         <Modal
           title="Xác nhận đặt phòng"
           open={isModalVisible}
