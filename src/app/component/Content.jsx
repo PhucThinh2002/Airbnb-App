@@ -23,7 +23,7 @@ const Content = () => {
     ];
 
     const handleLocationClick = (location) => {
-    const URL = `/rooms/${location.id}?location=${location.tenViTri}`;
+    const URL = `/rooms/${location.id}?location=${location.tenViTri}&date={}&count=1`;
     router.push(URL);
     };
 
