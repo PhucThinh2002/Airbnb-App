@@ -19,15 +19,16 @@ const formatDate = (dateString) => {
 const Location = async ({ params, searchParams }) => {
   const idLocation = params.location;
   const selectedDate = searchParams.date ? JSON.parse(decodeURIComponent(searchParams.date)) : null;
-
   const locationSlug = searchParams.location ? decodeURIComponent(searchParams.location) : '';
   const locationName = capitalizeWords(locationSlug);
-  
+  console.log("Địa điểm 1",locationSlug)
+  console.log("Địa điểm",locationName)
+  console.log( "Thời gian" ,selectedDate)
   const ApiRoomLocation = await getApiRoomByIdLocationAction(idLocation);
   const renderAllRoomLocation = () => {
     return ApiRoomLocation.map((item, index) => (
       <div key={index}>
-        <Link href={`/room-detail/${item.id}`} style={{ textDecoration: 'none' }}>
+        <Link href={`/room-detail/${item.id}?location=${locationSlug}&date=${searchParams.date}&count=${searchParams.count}`} style={{ textDecoration: 'none' }}>
           <div className="card m-3" style={{ borderRadius: '10px', overflow: 'hidden' }}>
             <div className="row g-0">
               <div className="col-md-6">
@@ -52,14 +53,14 @@ const Location = async ({ params, searchParams }) => {
                 <div>
                   <p
                     className="text-muted"
-                    title={`Toàn bộ căn hộ dịch vụ tại ${locationName}`}
+                    title={`Toàn bộ căn hộ dịch vụ tại ${locationSlug}`}
                     style={{
                       overflow: 'hidden',
                       whiteSpace: 'nowrap',
                       textOverflow: 'ellipsis', 
                     }}
                   >
-                    Toàn bộ căn hộ dịch vụ tại {locationName}
+                    Toàn bộ căn hộ dịch vụ tại {locationSlug}
                   </p>
                   <h5
                     className="mt-2"
@@ -128,11 +129,11 @@ const Location = async ({ params, searchParams }) => {
     ));
   };
   
-  return (
+  return (  
     <div >
-      <HeaderMenu/>
+      <HeaderMenu />
     <div className="container my-5 py-3">
-      <p>Có {ApiRoomLocation.length} chỗ ở tại {locationName}</p>
+      <p>Có {ApiRoomLocation.length} chỗ ở tại {locationSlug}</p>
       {selectedDate && selectedDate.length > 0 ? `Từ ${formatDate(selectedDate[0])} Đến ${formatDate(selectedDate[1])}` : ""}
       <h1>Danh sách phòng khu vực bạn đã chọn </h1>
       <div className="row">
@@ -140,7 +141,7 @@ const Location = async ({ params, searchParams }) => {
           {renderAllRoomLocation()}
         </div>
         <div className="col-md-6">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d984200.3130039243!2d107.31521886875078!3d15.509560292807175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420dd4e1353a7b%3A0xe49cabb166747679!2zUXXhuqNuZyBOYW0sIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1730561726170!5m2!1svi!2s" width="100%" height="100%" style={{ border: '0' }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d984200.3130039243!2d107.31521886875078!3d15.509560292807175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420dd4e1353a7b%3A0xe49cabb166747679!2zUXXhuqNuZyBOYW0sIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1730561726170!5m2!1svi!2s" width="100%" height="100%" style={{ border: '0' }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </div>

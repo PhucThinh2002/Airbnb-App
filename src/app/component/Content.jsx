@@ -10,7 +10,6 @@ const Content = () => {
     const dispatch = useDispatch();
     const { locations, loading, error } = useSelector((state) => state.locationReducer);
     const router = useRouter();
-
     useEffect(() => {
         dispatch(fetchLocationsByPageAsync());
     }, [dispatch]);
@@ -24,7 +23,8 @@ const Content = () => {
     ];
 
     const handleLocationClick = (location) => {
-        router.push(`/rooms/${location.id}`);
+    const URL = `/rooms/${location.id}?location=${location.tenViTri}&date={}&count=1`;
+    router.push(URL);
     };
 
     return (

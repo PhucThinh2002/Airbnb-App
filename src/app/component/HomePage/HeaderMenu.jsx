@@ -31,7 +31,7 @@ const HeaderMenu = () => {
           fontSize: '15px',
           position: 'absolute',
           top: '100%',
-          left: '0',
+          left : '40%',
           transform: 'translateY(13px)',
           zIndex: 1000,
           minWidth: '150px',

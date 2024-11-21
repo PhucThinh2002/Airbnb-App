@@ -12,7 +12,7 @@ const Rooms = async () => {
   const renderAllRoom = () => {
     return apiRoom.map((item, index) => (
       <div className="col-md-4 my-3" key={index}>
-        <Link href={`/room-detail/${item.id}`} style={{ textDecoration: 'none' }}>
+        <Link href={`/room-detail/${item.id}?location=&date={}&count=1`} style={{ textDecoration: 'none' }}>
           <Card
             hoverable
             style={{ width: 300, borderRadius: '10px', overflow: 'hidden' }}

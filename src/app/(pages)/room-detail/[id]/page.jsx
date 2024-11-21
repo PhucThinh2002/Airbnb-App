@@ -1,8 +1,10 @@
+
 import { getRoomByIDAction } from '@/app/actions/service/roomApi';
-import { CarOutlined, TranslationOutlined, UserOutlined, WifiOutlined, HomeOutlined, StarOutlined, TrophyOutlined, ScheduleOutlined } from '@ant-design/icons';
+import { CarOutlined, StarFilled, TranslationOutlined, UserOutlined, WifiOutlined } from '@ant-design/icons';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { HomeOutlined, StarOutlined, TrophyOutlined, ScheduleOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faParking, faSnowflake, faSoap, faSwimmer, faTShirt, faTv, faUtensils, faWifi } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +15,7 @@ import FooterComponent from '@/app/component/FooterComponent';
 
 const Detail = async (props) => {
   const roomDetail = await getRoomByIDAction(props.params.id);
+  const selectedDate = props.searchParams.date ? JSON.parse(decodeURIComponent(props.searchParams.date)) : null;
   const features = [
     { condition: roomDetail.mayGiat, label: "Máy Giặt", icon: faSoap },
     { condition: roomDetail.banLa, label: "Bàn là", icon: faTShirt },
@@ -25,22 +28,14 @@ const Detail = async (props) => {
   ];
 
   const availableFeatures = features.filter((feature) => feature.condition);
-
   return (
     <>
-      <HeaderMenu/>
+    <HeaderMenu/>
       <div className="container py-3 my-5">
         <h3 className="fw-bold">{roomDetail.tenPhong}</h3>
-
-        {/* Badge level icon using Ant Design */}
-        <div className="d-flex align-items-center">
-          <TrophyOutlined style={{ fontSize: '24px', color: '#fadb14', marginRight: '8px' }} />
-          <span>Chủ nhà siêu cấp</span>
-        </div>
-
-        <Link href="#">{roomDetail.maViTri}</Link>
+        <span><StarFilled style={{color:"red"}}/></span>
+        <Link className='px-3' style={{textDecoration:"none"}} href="#">{props.searchParams.location}</Link>
         <Image src={roomDetail.hinhAnh} style={{ width: '100%', height: '400px' }} alt="..." width={500} height={300} crossOrigin="anonymous" priority />
-
         <div className="row mt-3">
           <div className="col-md-7">
             <div className="d-flex me-2 justify-content-between">
@@ -66,7 +61,7 @@ const Detail = async (props) => {
             </div>
             <hr />
             <div className="d-flex align-items-start mb-3">
-              <HomeOutlined style={{ fontSize: '24px', marginRight: '10px' }} />
+              <HomeOutlined style={{ fontSize: '24px !important', marginRight: '10px' }} />
               <div className="ms-3">
                 <h5 className="fw-bold" style={{ fontSize: '16px' }}>Toàn bộ nhà</h5>
                 <p className="text-muted mb-0" style={{ fontSize: '16px' }}>Bạn sẽ có chung cư cao cấp cho riêng mình.</p>
@@ -74,7 +69,7 @@ const Detail = async (props) => {
             </div>
 
             <div className="d-flex align-items-start mb-3">
-              <StarOutlined style={{ fontSize: '24px', marginRight: '10px' }} />
+              <StarOutlined style={{ fontSize: '24px !important', marginRight: '10px' }} />
               <div className="ms-3">
                 <h5 className="fw-bold" style={{ fontSize: '16px' }}>Vệ sinh tăng cường</h5>
                 <p className="text-muted mb-0" style={{ fontSize: '16px' }}>
@@ -84,7 +79,7 @@ const Detail = async (props) => {
             </div>
 
             <div className="d-flex align-items-start mb-3">
-              <TrophyOutlined style={{ fontSize: '24px', marginRight: '10px' }} />
+              <TrophyOutlined style={{ fontSize: '24px !important', marginRight: '10px' }} />
               <div className="ms-3">
                 <h5 className="fw-bold" style={{ fontSize: '16px' }}>Phong là Chủ nhà siêu cấp</h5>
                 <p className="text-muted mb-0" style={{ fontSize: '16px' }}>
@@ -95,40 +90,40 @@ const Detail = async (props) => {
             </div>
 
             <div className="d-flex align-items-start mb-3">
-              <ScheduleOutlined style={{ fontSize: '24px', marginRight: '10px' }} />
+              <ScheduleOutlined style={{ fontSize: '24px !important', marginRight: '10px' }} />
               <div className="ms-3">
                 <h5 className="fw-bold" style={{ fontSize: '16px' }}>Miễn phí hủy trong 48 giờ</h5>
               </div>
             </div>
-            {/* <hr />
+            <hr />
             <div className="w-100 mt-4">
-              <Button
+              {/* <Button
                 className="w-100 text-black bg-white border-2 border-black rounded-lg py-3 hover:bg-gray-200 duration-300 flex justify-between items-center px-6"
                 icon={<TranslationOutlined />}
               >
                 Dịch sang tiếng Anh
-              </Button>
+              </Button> */}
               <p className="mt-4 text-justify">
-                Tự nhận phòng Tự nhận phòng bằng khóa thông minh. Dinh Long là Chủ nhà siêu cấp Chủ nhà siêu cấp là những chủ nhà có kinh nghiệm, được đánh giá cao và là những người cam kết mang lại quãng thời gian ở tuyệt vời cho khách.
+              Tự nhận phòng Tự nhận phòng bằng khóa thông minh. Dinh Long là Chủ nhà siêu cấp Chủ nhà siêu cấp là những chủ nhà có kinh nghiệm, được đánh giá cao và là những người cam kết mang lại quãng thời gian ở tuyệt vời cho khách.
               </p>
-            </div> */}
+            </div>
             <hr />
             <h3 className="fw-bold my-4">Các tiện ích đi kèm</h3>
             <div className="row">
               {availableFeatures.map((feature, index) => (
                 <div className="col-6 mb-3" key={index}>
-                  {/* <FontAwesomeIcon className="w-5 h-5" style={{ fontSize: "20px", marginRight: '8px' }} icon={feature.icon} /> */}
-                  <span className="mb-5">{feature.label}</span>
+                  {/* <FontAwesomeIcon className="w-5 h-5" style={{ fontSize: "20px" }} icon={feature.icon} /> */}
+                  <span className=" mb-5">{feature.label}</span>
                 </div>
               ))}
             </div>
           </div>
-          <div className="col-md-5">
-            <CardPayRoom roomDetail={roomDetail} idRoom={props.params.id} />
+          <div className="col-md-5 ">
+            <CardPayRoom roomDetail ={roomDetail} date= {selectedDate} count = {props.searchParams.count} idRoom={props.params.id}/>
           </div>
         </div>
         <hr />
-        <CommentContent idRoom={props.params.id} />
+        <CommentContent idRoom={props.params.id}/>
       </div>
       <FooterComponent/>
     </>
