@@ -10,7 +10,6 @@ const CardPayRoom = (props) => {
   const formatDate = (dateString) => {
     if (!dateString) return '';
     if (typeof dateString !== 'string') {
-      console.error('dateString is not a string');
       return '';
     }
     const [day, month, year] = dateString.split('-');

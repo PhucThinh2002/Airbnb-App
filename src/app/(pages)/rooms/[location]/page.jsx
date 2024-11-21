@@ -19,15 +19,16 @@ const formatDate = (dateString) => {
 const Location = async ({ params, searchParams }) => {
   const idLocation = params.location;
   const selectedDate = searchParams.date ? JSON.parse(decodeURIComponent(searchParams.date)) : null;
-
   const locationSlug = searchParams.location ? decodeURIComponent(searchParams.location) : '';
   const locationName = capitalizeWords(locationSlug);
-  
+  console.log("Địa điểm 1",locationSlug)
+  console.log("Địa điểm",locationName)
+  console.log( "Thời gian" ,selectedDate)
   const ApiRoomLocation = await getApiRoomByIdLocationAction(idLocation);
   const renderAllRoomLocation = () => {
     return ApiRoomLocation.map((item, index) => (
       <div key={index}>
-        <Link href={`/room-detail/${item.id}?location=${locationName}&date=${searchParams.date}&count=${searchParams.count}`} style={{ textDecoration: 'none' }}>
+        <Link href={`/room-detail/${item.id}?location=${locationSlug}&date=${searchParams.date}&count=${searchParams.count}`} style={{ textDecoration: 'none' }}>
           <div className="card m-3" style={{ borderRadius: '10px', overflow: 'hidden' }}>
             <div className="row g-0">
               <div className="col-md-6">
@@ -52,14 +53,14 @@ const Location = async ({ params, searchParams }) => {
                 <div>
                   <p
                     className="text-muted"
-                    title={`Toàn bộ căn hộ dịch vụ tại ${locationName}`}
+                    title={`Toàn bộ căn hộ dịch vụ tại ${locationSlug}`}
                     style={{
                       overflow: 'hidden',
                       whiteSpace: 'nowrap',
                       textOverflow: 'ellipsis', 
                     }}
                   >
-                    Toàn bộ căn hộ dịch vụ tại {locationName}
+                    Toàn bộ căn hộ dịch vụ tại {locationSlug}
                   </p>
                   <h5
                     className="mt-2"
@@ -128,11 +129,11 @@ const Location = async ({ params, searchParams }) => {
     ));
   };
   
-  return (
+  return (  
     <div >
-      <HeaderMenu/>
+      <HeaderMenu />
     <div className="container my-5 py-3">
-      <p>Có {ApiRoomLocation.length} chỗ ở tại {locationName}</p>
+      <p>Có {ApiRoomLocation.length} chỗ ở tại {locationSlug}</p>
       {selectedDate && selectedDate.length > 0 ? `Từ ${formatDate(selectedDate[0])} Đến ${formatDate(selectedDate[1])}` : ""}
       <h1>Danh sách phòng khu vực bạn đã chọn </h1>
       <div className="row">
