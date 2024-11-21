@@ -33,8 +33,11 @@ const Detail = async (props) => {
     <HeaderMenu/>
       <div className="container py-3 my-5">
         <h3 className="fw-bold">{roomDetail.tenPhong}</h3>
-        <span><StarFilled style={{color:"red"}}/></span>
-        <Link className='px-3' style={{textDecoration:"none"}} href="#">{props.searchParams.location}</Link>
+        <div className="d-flex align-items-center">
+          <TrophyOutlined style={{ fontSize: '24px', color: '#fadb14', marginRight: '8px' }} />
+          <span>Chủ nhà siêu cấp</span>
+          <Link className='px-3' style={{textDecoration:"none", color:"black"}} href="#">{props.searchParams.location}</Link>
+        </div> 
         <Image src={roomDetail.hinhAnh} style={{ width: '100%', height: '400px' }} alt="..." width={500} height={300} crossOrigin="anonymous" priority />
         <div className="row mt-3">
           <div className="col-md-7">

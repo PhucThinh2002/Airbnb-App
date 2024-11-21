@@ -84,8 +84,8 @@ const Search = () => {
     <div className="header-container">
     <div className="search container">
         <div className="bg-white p-3 shadow-lg">
-          <div className="row">
-            <div className="col-md-4">
+          <div className="row text-center">
+            <div className="col-md-3">  
               <input
                 type="text"
                 value={selectedLocation}
@@ -96,16 +96,16 @@ const Search = () => {
               />
               {showLocationDropdown && locationDropdown}
             </div>
-            <div className="col-md-4">
+            <div className="col-md-3">
               <DateRangePicker onDateChange={handleDateChange} />
             </div>
-            <div className="col-md-3 d-flex">
+            <div className="col-md-3">
               <SoLuongKhach
                 initialCount={guestCount}
                 onCountChange={handleGuestCountChange}
               />
             </div>
-            <div className="col-md-1">
+            <div className="col-md-3">
                 <button className="btn btn-danger rounded-pill" onClick={handleFindRooms}>
                   <i className="fas fa-search" />
                 </button>
