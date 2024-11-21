@@ -81,6 +81,7 @@ const Search = () => {
   );
   
   return (
+    <div className="header-container">
     <div className="search container">
         <div className="bg-white p-3 shadow-lg">
           <div className="row">
@@ -112,7 +113,7 @@ const Search = () => {
           </div>
         </div>
       </div>
-
+</div>
       
   )
 }

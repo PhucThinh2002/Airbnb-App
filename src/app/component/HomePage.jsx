@@ -8,11 +8,11 @@ const HomePage = () => {
 
 
   return (
-    <div className="header-container">
+    <>
       <HeaderMenu/>
       <Search />
       <Carousel/>
-    </div>
+    </>
   );
 };
 

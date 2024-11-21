@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 
 const Carousel = () => (
+  <div className="header-container">
     <div className="carousel-container">
     <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
       <div className="carousel-inner">
@@ -24,6 +25,7 @@ const Carousel = () => (
         <span className="visually-hidden">Next</span>
       </button>
     </div>
+  </div>
   </div>
 );
 

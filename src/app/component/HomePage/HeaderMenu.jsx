@@ -74,7 +74,7 @@ const HeaderMenu = () => {
   }, []);
 
   return (
-    <div>
+    <div className="header-container">
       <nav className="navbar navbar-expand-lg">
         <div className="container d-flex justify-content-between align-items-center">
           <Link href="/" className="navbar-brand d-flex align-items-center">
