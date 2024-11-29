@@ -14,6 +14,7 @@
     justify-content: center;
     cursor: pointer;
     transition: opacity 0.3s ease;
+    z-index: 9999999;
   }
   
   .scroll-to-top.show {

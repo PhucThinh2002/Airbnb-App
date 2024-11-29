@@ -207,8 +207,8 @@ const Profile = () => {
                             Chỉnh sửa hồ sơ
                         </a>
                         <h3 className='fw-bold mt-3'>Phòng Đã Thuê</h3>
-                        {Array.isArray(apiUserBook) ? (
-                            <Table dataSource={dataSource} columns={columns} rowKey="id" />
+                        {Array.isArray(dataSource) ? (
+                            <Table dataSource={dataSource} columns={columns} rowKey='id' />
                         ) : (
                             <p>Bạn chưa đặt phòng nào</p>
                         )}
