@@ -16,8 +16,9 @@ const Register = () => {
       email: '',
       password: '',
       confirmPassword: '',
-      fullName: '',
+      name: '',
       phone: '',
+      gender: true
     },
     validationSchema: Yup.object({
       email: Yup.string().required("Email không được để trống").email("Email không đúng định dạng"),
@@ -25,7 +26,7 @@ const Register = () => {
       confirmPassword: Yup.string()
         .required("Xác nhận mật khẩu không được để trống")
         .oneOf([Yup.ref('password'), null], 'Mật khẩu xác nhận không khớp'),
-      fullName: Yup.string().required("Họ tên không được để trống"),
+      name: Yup.string().required("Họ tên không được để trống"),
       phone: Yup.string().required("Số điện thoại không được để trống"),
     }),
     onSubmit: async (values) => {
@@ -70,20 +71,20 @@ const Register = () => {
             <h3 className="mb-4">Đăng Ký</h3>
             <form onSubmit={frmRegister.handleSubmit}>
               <div className="mb-3">
-                <label htmlFor="fullName" className="form-label">Họ tên</label>
+                <label htmlFor="name" className="form-label">Họ tên</label>
                 <input
                   type="text"
-                  id="fullName"
-                  name="fullName"
+                  id="name"
+                  name="name"
                   className="form-control"
-                  value={frmRegister.values.fullName}
+                  value={frmRegister.values.name}
                   onChange={frmRegister.handleChange}
                   onBlur={frmRegister.handleBlur}
                 />
               </div>
-              {frmRegister.errors.fullName && frmRegister.submitCount > 0 ? (
+              {frmRegister.errors.name && frmRegister.submitCount > 0 ? (
                 <div className="form-text text-danger">
-                  {frmRegister.errors.fullName}
+                  {frmRegister.errors.name}
                 </div>
               ) : null}
 
@@ -158,6 +159,21 @@ const Register = () => {
                   {frmRegister.errors.phone}
                 </div>
               ) : null}
+
+<div className="mb-3">
+    <label htmlFor="gender" className="form-label">Giới tính</label>
+    <select
+      id="gender"
+      name="gender"
+      className="form-select"
+      value={frmRegister.values.gender}
+      onChange={frmRegister.handleChange}
+      onBlur={frmRegister.handleBlur}
+    >
+      <option value={true}>Nam</option>
+      <option value={false}>Nữ</option>
+    </select>
+  </div>
 
               <div className="d-flex justify-content-between mt-4">
                 <button type="submit" className="btn btn-warning btn-signup">Đăng ký</button>

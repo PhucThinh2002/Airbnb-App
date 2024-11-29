@@ -129,10 +129,6 @@ const Profile = () => {
             key: 'soLuongKhach',
         },
     ];
-    const dataSource = apiUserBook.map((item) => ({
-        ...item,
-        key: item.id, 
-    }));
     
     useEffect(() => {
         getProfileApi();
@@ -161,12 +157,13 @@ const Profile = () => {
                                 {userProfile.avatar ? (
                                     <img
                                         src={userProfile.avatar}
-                                        width="70%"
+                                        width="200px"
+                                        height="200px"
                                         alt={`Avatar của ${userProfile.name}`}
                                         className="mb-3 rounded-circle"
                                     />
                                 ) : (
-                                    <UserOutlined className="mb-3" style={{ backgroundColor: 'black', fontSize: '150px', color: 'white' }} />
+                                    <UserOutlined className="mb-3 rounded-circle" style={{ backgroundColor: 'black', fontSize: '200px', color: 'white' }} />
                                 )}
                                 <span
                                     className='mt-2'
@@ -207,8 +204,8 @@ const Profile = () => {
                             Chỉnh sửa hồ sơ
                         </a>
                         <h3 className='fw-bold mt-3'>Phòng Đã Thuê</h3>
-                        {Array.isArray(dataSource) ? (
-                            <Table dataSource={dataSource} columns={columns} rowKey='id' />
+                        {Array.isArray(apiUserBook) ? (
+                            <Table dataSource={apiUserBook} columns={columns} rowKey='id' />
                         ) : (
                             <p>Bạn chưa đặt phòng nào</p>
                         )}

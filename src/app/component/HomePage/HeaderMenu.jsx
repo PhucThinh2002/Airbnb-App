@@ -11,6 +11,7 @@ const HeaderMenu = () => {
   const [isClient, setIsClient] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { userLogin } = useSelector((state) => state.userReducer) || {};
+  console.log({userLogin})
   const dropdownRef = useRef(null);
 
   const handleUserClick = () => {
@@ -27,6 +28,7 @@ const HeaderMenu = () => {
     localStorage.removeItem(USER_LOGIN);
     deleteCookie(USER_LOGIN);
     window.location.reload();
+    
   };
 
   const handleClickOutside = (event) => {
@@ -34,17 +36,6 @@ const HeaderMenu = () => {
       setShowDropdown(false);
     }
   };
-
-  useEffect(() => {
-    if (showDropdown) {
-      document.addEventListener('click', handleClickOutside);
-    } else {
-      document.removeEventListener('click', handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [showDropdown]);
 
   const userDropdown = () => {
     return (
@@ -92,7 +83,16 @@ const HeaderMenu = () => {
       </ul>
     );
   };
-
+  useEffect(() => {
+    if (showDropdown) {
+      document.addEventListener('click', handleClickOutside);
+    } else {
+      document.removeEventListener('click', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [showDropdown]);
   useEffect(() => {
     setIsClient(true);
   }, []);
