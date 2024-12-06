@@ -11,7 +11,6 @@ const HeaderMenu = () => {
   const [isClient, setIsClient] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { userLogin } = useSelector((state) => state.userReducer) || {};
-  console.log({userLogin})
   const dropdownRef = useRef(null);
 
   const handleUserClick = () => {
@@ -23,12 +22,10 @@ const HeaderMenu = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem(TOKEN);
-    localStorage.removeItem(Email);
-    localStorage.removeItem(USER_LOGIN);
-    deleteCookie(USER_LOGIN);
-    window.location.reload();
-    
+      localStorage.removeItem(TOKEN);
+      localStorage.removeItem(Email);
+      localStorage.removeItem(USER_LOGIN);
+      deleteCookie(USER_LOGIN);
   };
 
   const handleClickOutside = (event) => {
@@ -76,7 +73,7 @@ const HeaderMenu = () => {
               </li>
             )}
             <li className="dropdown-item">
-              <Link href="/" className="text-decoration-none text-dark" onClick={handleLogout}>Đăng Xuất</Link>
+              <Link href="/login" className="text-decoration-none text-dark" onClick={handleLogout}>Đăng Xuất</Link>
             </li>
           </>
         )}
