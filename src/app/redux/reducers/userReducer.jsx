@@ -1,5 +1,5 @@
 "use client"
-import { Email, http, setCookie, TOKEN, USER_ID, USER_LOGIN } from '@/app/setting/setting';
+import { Email, getCookie, http, setCookie, TOKEN, USER_ID, USER_LOGIN } from '@/app/setting/setting';
 import { createSlice } from '@reduxjs/toolkit'
 import { message } from 'antd';
 
@@ -45,6 +45,7 @@ const userReducer = createSlice({
     },
     setAvatarAction: (state,action) => {
       state.userProfile = action.payload
+      
     }
   }
 });
@@ -122,32 +123,26 @@ export const setProfileActionAsync = () => {
   };
 };
 
-export const updateProfileActionAsync = (userProfile) => {
-  return async(dispatch) => {
-    try{
-      const userId = getUserIdFromLocalStorage();
-      const res = await http.put(`/api/users/${userId}`, userProfile);
-
-      dispatch(setProfileAction(res.data.content));
-      message.success("Cap nhat thanh cong")
-    }catch(err){
-      message.error("Cap nhat that bai")
-      
-    }
-  }
-}
-
 export const uploadAvatarActionAsync = (file) => {
-  return async(dispatch) =>{
-    try{
-      const res = await http.post("/api/users/upload-avatar", file)
-    const action = setAvatarAction(res.data.content)
-    dispatch(action)
-    alert("Cap nhat avatar thanh cong")
-    }catch(err){
-      alert("Cap nhat avatar that bai")
-      console.log("err", err)
+  return async (dispatch, getState) => {
+    try {
+      const res = await http.post("/api/users/upload-avatar", file);
+      const newAvatarUrl = res.data.content.avatar;  
+      const { userProfile, userLogin } = getState().userReducer;
+      const updatedProfile = { ...userProfile, avatar: newAvatarUrl };
+      const updatedUserLogin = { ...userLogin, avatar: newAvatarUrl };
+      dispatch(setProfileAction(updatedProfile));
+      dispatch(setUserLogicAction(updatedUserLogin));
+      localStorage.setItem(USER_LOGIN, JSON.stringify(updatedUserLogin));
+      setCookie(USER_LOGIN, JSON.stringify(updatedUserLogin));
+      alert("Cập nhật avatar thành công");
+    } catch (err) {
+      alert("Cập nhật avatar thất bại");
+      console.error("Error uploading avatar:", err);
     }
+  };
+};
 
-  }
-}
+
+
+

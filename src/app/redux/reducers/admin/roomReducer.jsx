@@ -56,14 +56,21 @@ export const updateRoomActionAsync = (roomID, roomForm) => {
 
 export const deleteRoomActionAsync = (roomID) => async (dispatch, getState) => {
   try {
-    await http.delete(`/api/phong-thue/${roomID}`);
-    const apiRoom = getState().roomReducer.apiRoom;
-    const updatedRooms = apiRoom.filter((room) => room.id !== roomID);
-    dispatch(setRoomDeleteAction(updatedRooms));
+    const res = await http.delete(`/api/phong-thue/${roomID}`);
+
+    if (res.status === 200) {
+      const apiRoom = getState().roomReducer.apiRoom;
+      const updatedRooms = apiRoom.filter((room) => room.id !== roomID);
+      dispatch(setRoomDeleteAction(updatedRooms));
+      message.success("Xóa phòng thành công!");
+    } else {
+      message.error("Xóa phòng thất bại, thử lại sau!");
+    }
   } catch (error) {
-    console.error('Xóa phòng thất bại:', error);
+    console.error("Lỗi khi xóa phòng:", error);
   }
 };
+
 
 export const addRoomActionAsync = (roomForm) => {
   return async(dispatch)=> {

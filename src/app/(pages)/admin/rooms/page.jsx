@@ -193,14 +193,8 @@ const Room = () => {
     } else if (modalType === "delete" && modalRecord.id) {
       try {
         await dispatch(deleteRoomActionAsync(modalRecord.id));
-        const updatedRooms = filteredData.filter(
-          (room) => room.id !== modalRecord.id
-        );
-        setFilteredData(updatedRooms);
         setIsModalVisible(false);
-        message.success("Xóa thành công");
       } catch (err) {
-        message.error("Xóa Thất bại");
       }
     } else if (modalType === "add") {
       if (!isDataComplete(roomForm)) {

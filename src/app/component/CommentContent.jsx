@@ -9,6 +9,7 @@ const CommentContent = (props) => {
   
   const { idRoom } = props;
   const [userProfile, setUserProfile] = useState(null);
+  
   const [comments, setComments] = useState([]);
   const [editingComment, setEditingComment] = useState(null); 
   const formRef = useRef(null);
@@ -100,7 +101,7 @@ const CommentContent = (props) => {
     },
   });
   useEffect(() => {
-    const user = JSON.parse(getCookie(USER_LOGIN)) || null;
+    const user = JSON.parse(localStorage.getItem(USER_LOGIN)) || null;
     setUserProfile(user);
     getCommentByRoom();
   }, [idRoom]);

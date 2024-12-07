@@ -103,17 +103,23 @@ export const deleteUserActionAsync = (userId) => {
   return async (dispatch, getState) => {
     try {
       const res = await http.delete(`/api/users?id=${userId}`);
-      const currentUsers = getState().adminReducer.userApi;
-      const updatedUsers = currentUsers.filter(user => user.id !== userId); 
-      const action = setUserDeleteAction(updatedUsers);
-      dispatch(action);
-      
-      message.success("Xóa Thành công!");
+
+      if (res.status === 200) {
+        const currentUsers = getState().adminReducer.userApi;
+        const updatedUsers = currentUsers.filter((user) => user.id !== userId);
+
+        dispatch(setUserDeleteAction(updatedUsers));
+        message.success("Xóa thành công!");
+      } else {
+        message.error("Xóa thất bại, thử lại sau!");
+      }
     } catch (error) {
-      message.error("Xóa thất bại!");
+      console.error("Lỗi khi xóa người dùng:", error);
     }
   };
 };
+
+
 
 
 

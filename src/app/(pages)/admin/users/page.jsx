@@ -89,11 +89,8 @@ const User = () => {
     } else if (modalType === 'delete' && modalRecord.id) {
       try {
         await dispatch(deleteUserActionAsync(modalRecord.id));
-        const updatedUsers = filteredData.filter(user => user.id !== modalRecord.id);
-        setFilteredData(updatedUsers);
         setIsModalVisible(false);
       } catch (error) {
-        message.error("Lỗi khi xóa!");
 
       }
     } else if (modalType === 'add') {
