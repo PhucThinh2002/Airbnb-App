@@ -17,6 +17,7 @@ const Profile = () => {
     const [isProfileLoaded, setIsProfileLoaded] = useState(false);
     const { userProfile } = useSelector((state) => state.userReducer);
     const { apiUserBook } = useSelector((state) => state.bookReducer);
+    console.log({apiUserBook})
     const [loading, setLoading] = useState(true);
     const getApiRoomBook = () => {
         setLoading(true);
@@ -102,11 +103,6 @@ const Profile = () => {
             key: 'id',
         },
         {
-            title: 'Mã người dùng',
-            dataIndex: 'maNguoiDung',
-            key: 'maNguoiDung',
-        },
-        {
             title: 'Mã phòng',
             dataIndex: 'maPhong',
             key: 'maPhong',
@@ -128,6 +124,16 @@ const Profile = () => {
             dataIndex: 'soLuongKhach',
             key: 'soLuongKhach',
         },
+        {
+            title: 'Hành động',
+            key: 'action',
+            render: (text, record) => (
+                <div style={{ display: 'flex', whiteSpace: 'nowrap' }}>
+                    <button className='btn me-2 my-2 btn-success'>Xem thêm</button>
+                </div>
+            ),
+        }
+       
     ];
     
     useEffect(() => {
@@ -205,7 +211,9 @@ const Profile = () => {
                         </a>
                         <h3 className='fw-bold mt-3'>Phòng Đã Thuê</h3>
                         {Array.isArray(apiUserBook) ? (
-                            <Table dataSource={apiUserBook} columns={columns} rowKey='id' />
+                            <Table dataSource={apiUserBook} columns={columns} rowKey='id'  pagination={{
+                                pageSize: 4,  
+                            }} />
                         ) : (
                             <p>Bạn chưa đặt phòng nào</p>
                         )}
