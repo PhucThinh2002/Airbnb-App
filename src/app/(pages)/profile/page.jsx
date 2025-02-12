@@ -2,7 +2,7 @@
 import Head from 'next/head';
 import FooterComponent from '@/app/component/FooterComponent';
 import HeaderMenu from '@/app/component/HomePage/HeaderMenu';
-import { setProfileActionAsync, updateProfileActionAsync, uploadAvatarActionAsync } from '@/app/redux/reducers/userReducer';
+import { setProfileActionAsync,  updateProfileActionAsync,  uploadAvatarActionAsync } from '@/app/redux/reducers/userReducer';
 import { CheckCircleFilled, CloseCircleFilled, UserOutlined } from '@ant-design/icons';
 import { Button, Input, Modal, Table, Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
@@ -17,7 +17,6 @@ const Profile = () => {
     const [isProfileLoaded, setIsProfileLoaded] = useState(false);
     const { userProfile } = useSelector((state) => state.userReducer);
     const { apiUserBook } = useSelector((state) => state.bookReducer);
-    console.log({apiUserBook})
     const [loading, setLoading] = useState(true);
     const getApiRoomBook = () => {
         setLoading(true);

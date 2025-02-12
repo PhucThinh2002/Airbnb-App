@@ -143,6 +143,33 @@ export const uploadAvatarActionAsync = (file) => {
   };
 };
 
+export const updateProfileActionAsync = (updatedProfileData) => {
+  return async (dispatch, getState) => {
+    try {
+      const userId = getUserIdFromLocalStorage();
+      if (!userId) {
+        message.error("Không tìm thấy ID người dùng.");
+        return;
+      }
+
+      const res = await http.put(`/api/users/${userId}`, updatedProfileData);
+
+      // Cập nhật state trong Redux
+      dispatch(setProfileAction(res.data.content));
+
+      // Cập nhật userLogin trong localStorage
+      const updatedUserLogin = { ...getState().userReducer.userLogin, ...res.data.content };
+      localStorage.setItem(USER_LOGIN, JSON.stringify(updatedUserLogin));
+      setCookie(USER_LOGIN, JSON.stringify(updatedUserLogin));
+
+      message.success("Cập nhật thông tin thành công!");
+    } catch (error) {
+      console.error("Lỗi khi cập nhật thông tin:", error);
+      message.error("Cập nhật thất bại. Vui lòng thử lại!");
+    }
+  };
+};
+
 
 
 

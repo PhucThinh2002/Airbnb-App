@@ -93,6 +93,7 @@ const HeaderMenu = () => {
   useEffect(() => {
     setIsClient(true);
   }, []);
+  
 
   return (
     <div className="header-container">
