@@ -30,7 +30,7 @@ export function deleteCookie(name) {
 }
 
 export const DOMAIN = "https://airbnbnew.cybersoft.edu.vn";
-export const TOKEN_CYBERSOFT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCA3MCIsIkhldEhhblN0cmluZyI6IjIzLzAyLzIwMjUiLCJIZXRIYW5UaW1lIjoiMTc0MDI2ODgwMDAwMCIsIm5iZiI6MTcxMDY5NDgwMCwiZXhwIjoxNzQwNDE2NDAwfQ.4h_n3Y6QkB2Fd9Do7Om2uu2eskXK3qO1JS-Fk_NChQI";
+export const TOKEN_CYBERSOFT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJOb2RlanMgNDUiLCJIZXRIYW5TdHJpbmciOiIwMS8wNS8yMDI1IiwiSGV0SGFuVGltZSI6IjE3NDYwNTc2MDAwMDAiLCJuYmYiOjE3Mjc0NTY0MDAsImV4cCI6MTc0NjIwNTIwMH0.PzBrbPqj4UBRfSiGqAHeXWsE8SLTZWBERwn6CiRs63w";
 
 export const http = axios.create({
   baseURL: DOMAIN,
